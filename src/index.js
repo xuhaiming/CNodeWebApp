@@ -21,9 +21,7 @@ class TopicList extends Component {
   }
 
   render() {
-    const topicList = this.state.topics.map(topic => {
-      return <div>{JSON.stringify(topic)}</div>;
-    });
+    const topicList = this.state.topics.map(topic => <div>{JSON.stringify(topic)}</div>);
 
     return (
       <div>
