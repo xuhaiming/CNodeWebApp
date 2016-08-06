@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import request from 'superagent';
 import Tabs from './Tabs';
 import TopicList from './TopicList';
+import { get } from '../api/client';
 
 class MainPage extends Component {
   componentDidMount() {
-    request
-      .get('https://cnodejs.org/api/v1/topics')
-      .end((err, res) => {
-        this.props.fetchData(res.body.data);
-      });
+    get('topics').then(data => this.props.fetchData(data));
   }
 
   render() {

@@ -11,11 +11,9 @@ const Tabs = ({ filterData }) => (
   </div>
 );
 
-
 Tabs.propTypes = {
   filterData: React.PropTypes.func.isRequired
 };
-
 
 const mapDispatchToProps = dispatch => ({
   filterData: tab => {

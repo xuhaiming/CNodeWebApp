@@ -25,5 +25,4 @@ TopicItem.propTypes = {
   }).isRequired
 };
 
-
 export default TopicItem;
