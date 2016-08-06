@@ -1,29 +1,32 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 
-class Tabs extends Component {
-  constructor() {
-    super();
-    this.filterGood = this.filterTab.bind(this, 'good');
-    this.filterShare = this.filterTab.bind(this, 'share');
-    this.filterAsk = this.filterTab.bind(this, 'ask');
-    this.filterJob = this.filterTab.bind(this, 'job');
+const Tabs = ({ filterData }) => (
+  <div>
+    <button onClick={() => filterData('all')}>All</button>
+    <button onClick={() => filterData('good')}>Good</button>
+    <button onClick={() => filterData('share')}>Share</button>
+    <button onClick={() => filterData('ask')}>Ask</button>
+    <button onClick={() => filterData('job')}>Job</button>
+  </div>
+);
+
+
+Tabs.propTypes = {
+  filterData: React.PropTypes.func.isRequired
+};
+
+
+const mapDispatchToProps = dispatch => ({
+  filterData: tab => {
+    dispatch({
+      type: 'TOPICS_FILTER',
+      tab
+    });
   }
+});
 
-  filterTab(tab) {
-    this.props.filterTab(tab);
-  }
-
-  render() {
-    return (
-      <div>
-        <button>All</button>
-        <button onClick={this.filterGood}>Good</button>
-        <button onClick={this.filterShare}>Share</button>
-        <button onClick={this.filterAsk}>Ask</button>
-        <button onClick={this.filterJob}>Job</button>
-      </div>
-    );
-  }
-}
-
-export default Tabs;
+export default connect(
+  null,
+  mapDispatchToProps
+)(Tabs);

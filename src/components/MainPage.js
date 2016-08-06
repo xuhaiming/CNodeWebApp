@@ -1,55 +1,42 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import request from 'superagent';
 import Tabs from './Tabs';
 import TopicList from './TopicList';
 
 class MainPage extends Component {
-  constructor() {
-    super();
-
-    this.filterTab = this.filterTab.bind(this);
-
-    this.state = {
-      originalTopics: [],
-      topics: []
-    };
-  }
-
   componentDidMount() {
     request
       .get('https://cnodejs.org/api/v1/topics')
       .end((err, res) => {
-        this.setState({
-          originalTopics: res.body.data,
-          topics: res.body.data
-        });
+        this.props.fetchData(res.body.data);
       });
-  }
-
-  filterCriteria(topic, tab) {
-    if (tab === 'good') {
-      return topic.good;
-    }
-
-    return topic.tab === tab;
-  }
-
-  filterTab(tab) {
-    const topics = this.state.originalTopics.filter(topic => this.filterCriteria(topic, tab));
-
-    this.setState({
-      topics
-    });
   }
 
   render() {
     return (
       <div>
-        <Tabs filterTab={this.filterTab} />
-        <TopicList topics={this.state.topics} />
+        <Tabs />
+        <TopicList />
       </div>
     );
   }
 }
 
-export default MainPage;
+MainPage.propTypes = {
+  fetchData: React.PropTypes.func.isRequired
+};
+
+const mapDispatchToProps = dispatch => ({
+  fetchData: topics => {
+    dispatch({
+      type: 'TOPICS_FETCH',
+      data: topics
+    });
+  }
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(MainPage);

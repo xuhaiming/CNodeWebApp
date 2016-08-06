@@ -4,6 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 class TopicItem extends Component {
   constructor() {
     super();
+
     this.style = {
       width: '100%'
     };
@@ -17,5 +18,12 @@ class TopicItem extends Component {
     );
   }
 }
+
+TopicItem.propTypes = {
+  topic: React.PropTypes.shape({
+    title: React.PropTypes.string.isRequired
+  }).isRequired
+};
+
 
 export default TopicItem;
