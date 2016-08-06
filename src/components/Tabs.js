@@ -1,28 +1,43 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { get } from '../api/client';
 
-const Tabs = ({ filterData }) => (
-  <div>
-    <button onClick={() => filterData('all')}>All</button>
-    <button onClick={() => filterData('good')}>Good</button>
-    <button onClick={() => filterData('share')}>Share</button>
-    <button onClick={() => filterData('ask')}>Ask</button>
-    <button onClick={() => filterData('job')}>Job</button>
-  </div>
-);
+class Tabs extends Component {
+  constructor() {
+    super();
+    this.fetchTabData = this.fetchTabData.bind(this);
+  }
+
+  fetchTabData(tab) {
+    get('topics', { tab }).then(data => this.props.fetchData(data));
+  }
+
+  render() {
+    return (
+      <div>
+        <button onClick={() => this.fetchTabData()}>All</button>
+        <button onClick={() => this.fetchTabData('good')}>Good</button>
+        <button onClick={() => this.fetchTabData('share')}>Share</button>
+        <button onClick={() => this.fetchTabData('ask')}>Ask</button>
+        <button onClick={() => this.fetchTabData('job')}>Job</button>
+      </div>
+    );
+  }
+}
 
 Tabs.propTypes = {
-  filterData: React.PropTypes.func.isRequired
+  fetchData: React.PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = dispatch => ({
-  filterData: tab => {
+  fetchData: topics => {
     dispatch({
-      type: 'TOPICS_FILTER',
-      tab
+      type: 'TOPICS_FETCH',
+      data: topics
     });
   }
 });
+
 
 export default connect(
   null,
