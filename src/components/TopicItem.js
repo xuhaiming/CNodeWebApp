@@ -1,23 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 
-class TopicItem extends Component {
-  constructor() {
-    super();
-
-    this.style = {
-      width: '100%'
-    };
+const styles = {
+  titleContainer: {
+    margin: 0,
+    height: 65
+  },
+  title: {
+    margin: 0
   }
+};
 
-  render() {
-    return (
-      <RaisedButton style={this.style}>
-        <h3>{this.props.topic.title}</h3>
-      </RaisedButton>
-    );
-  }
-}
+const TopicItem = ({ topic }) => (
+  <RaisedButton fullWidth style={styles.titleContainer}>
+    <h3 style={styles.title}>{topic.title}</h3>
+  </RaisedButton>
+);
 
 TopicItem.propTypes = {
   topic: React.PropTypes.shape({

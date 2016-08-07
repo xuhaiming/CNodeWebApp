@@ -1,45 +1,54 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { get } from '../api/client';
+import { Tabs, Tab } from 'material-ui/Tabs';
+import TopicList from './TopicList';
 
-class Tabs extends Component {
+const tabNames = ['all', 'good', 'share', 'ask', 'job'];
+
+class NavBar extends Component {
   constructor() {
     super();
-    this.fetchTabData = this.fetchTabData.bind(this);
+
+    this.onActive = this.onActive.bind(this);
   }
 
-  fetchTabData(tab) {
-    get('topics', { tab }).then(data => this.props.fetchData(data));
+  onActive(tab) {
+    const tabName = tab.props.label;
+
+    get('topics', { tab: tabName }).then(data => this.props.fetchData(tabName, data));
   }
 
   render() {
+    const navItems = tabNames.map(name => (
+      <Tab onActive={this.onActive} key={name} label={name}>
+        <TopicList tabName={name} />
+      </Tab>
+    ));
+
     return (
-      <div>
-        <button onClick={() => this.fetchTabData()}>All</button>
-        <button onClick={() => this.fetchTabData('good')}>Good</button>
-        <button onClick={() => this.fetchTabData('share')}>Share</button>
-        <button onClick={() => this.fetchTabData('ask')}>Ask</button>
-        <button onClick={() => this.fetchTabData('job')}>Job</button>
-      </div>
+      <Tabs>
+        {navItems}
+      </Tabs>
     );
   }
 }
 
-Tabs.propTypes = {
+NavBar.propTypes = {
   fetchData: React.PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchData: topics => {
+  fetchData: (tab, data) => {
     dispatch({
       type: 'TOPICS_FETCH',
-      data: topics
+      data,
+      tab
     });
   }
 });
 
-
 export default connect(
   null,
   mapDispatchToProps
-)(Tabs);
+)(NavBar);

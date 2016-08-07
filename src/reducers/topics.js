@@ -1,13 +1,11 @@
-const initialState = {
-  currentTopics: []
-};
+const topics = (state = {}, action) => {
+  const data = {};
 
-const topics = (state = initialState, action) => {
   switch (action.type) {
     case 'TOPICS_FETCH':
-      return {
-        currentTopics: action.data
-      };
+      data[action.tab] = action.data;
+
+      return Object.assign({}, state, data);
     default:
       return state;
   }
