@@ -14,11 +14,17 @@ class NavBar extends Component {
   }
 
   onActive(tab) {
-    this.props.switchTab(`/${tab.props.value}`);
+    const urlTab = tab.props.value === 'all' ? '' : tab.props.value;
+
+    this.props.switchTab(`/${urlTab}`);
+  }
+
+  getLocation() {
+    return this.props.location === '' ? 'all' : this.props.location;
   }
 
   isActive(tabName) {
-    return tabName === this.props.location;
+    return tabName === this.getLocation();
   }
 
   render() {
@@ -29,7 +35,7 @@ class NavBar extends Component {
     ));
 
     return (
-      <Tabs value={this.props.location}>
+      <Tabs value={this.getLocation()}>
         {navItems}
       </Tabs>
     );
