@@ -1,5 +1,4 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   entry: [
@@ -13,10 +12,9 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js$/,
-        loaders: [ 'babel' ],
-        exclude: /node_modules/,
-        include: __dirname
+        test: /\.jsx?$/,
+        loaders: ['babel-loader?presets[]=react,presets[]=es2015'],
+        exclude: /node_modules/
       }
     ]
   }
