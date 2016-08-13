@@ -11,8 +11,8 @@ const styles = {
 };
 
 class TopicList extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {};
   }

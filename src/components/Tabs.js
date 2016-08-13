@@ -1,26 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Tabs, Tab } from 'material-ui/Tabs';
+import SwipeableViews from 'react-swipeable-views';
 import TopicList from './TopicList';
 import { push } from 'react-router-redux';
 
 const tabNames = ['all', 'good', 'share', 'ask', 'job'];
 
-class NavBar extends Component {
-  constructor() {
-    super();
-
-    this.onActive = this.onActive.bind(this);
+const styles = {
+  swipeContainer: {
+    height: '100%'
   }
+};
 
-  onActive(tab) {
-    const urlTab = tab.props.value === 'all' ? '' : tab.props.value;
+class NavBar extends Component {
+  constructor(props) {
+    super(props);
 
-    this.props.switchTab(`/${urlTab}`);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   getLocation() {
     return this.props.location === '' ? 'all' : this.props.location;
+  }
+
+  getSlideIndex() {
+    return tabNames.indexOf(this.getLocation());
+  }
+
+  handleChange(index) {
+    const urlTab = tabNames[index] === 'all' ? '' : tabNames[index];
+
+    this.props.switchTab(`/${urlTab}`);
   }
 
   isActive(tabName) {
@@ -28,16 +39,27 @@ class NavBar extends Component {
   }
 
   render() {
-    const navItems = tabNames.map(name => (
-      <Tab onActive={this.onActive} key={name} label={name} value={name}>
-        <TopicList tabName={name} isActive={this.isActive(name)} />
-      </Tab>
+    const navItems = tabNames.map((name, index) => (
+      <Tab key={name} label={name} value={index} />
+    ));
+
+    const topicLists = tabNames.map(name => (
+      <TopicList key={name} tabName={name} isActive={this.isActive(name)} />
     ));
 
     return (
-      <Tabs value={this.getLocation()}>
-        {navItems}
-      </Tabs>
+      <div>
+        <Tabs onChange={this.handleChange} value={this.getSlideIndex()} >
+          {navItems}
+        </Tabs>
+        <SwipeableViews
+          index={this.getSlideIndex()}
+          onChangeIndex={this.handleChange}
+          containerStyle={styles.swipeContainer}
+        >
+          {topicLists}
+        </SwipeableViews>
+      </div>
     );
   }
 }
