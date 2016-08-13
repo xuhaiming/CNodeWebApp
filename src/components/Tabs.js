@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { get } from '../api/client';
 import { Tabs, Tab } from 'material-ui/Tabs';
 import TopicList from './TopicList';
 import { push } from 'react-router-redux';
@@ -14,23 +13,18 @@ class NavBar extends Component {
     this.onActive = this.onActive.bind(this);
   }
 
-  componentDidMount() {
-    this.renderTab(this.props.location);
-  }
-
   onActive(tab) {
-    this.renderTab(tab.props.value);
+    this.props.switchTab(`/${tab.props.value}`);
   }
 
-  renderTab(currentTab) {
-    this.props.switchTab(`/${currentTab}`);
-    get('topics', { tab: currentTab }).then(data => this.props.fetchData(currentTab, data));
+  isActive(tabName) {
+    return tabName === this.props.location;
   }
 
   render() {
     const navItems = tabNames.map(name => (
       <Tab onActive={this.onActive} key={name} label={name} value={name}>
-        <TopicList tabName={name} />
+        <TopicList tabName={name} isActive={this.isActive(name)} />
       </Tab>
     ));
 
@@ -44,7 +38,7 @@ class NavBar extends Component {
 
 NavBar.propTypes = {
   location: React.PropTypes.string.isRequired,
-  fetchData: React.PropTypes.func.isRequired
+  switchTab: React.PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -54,13 +48,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   switchTab: (tab) => {
     dispatch(push(tab));
-  },
-  fetchData: (tab, data) => {
-    dispatch({
-      type: 'TOPICS_FETCH',
-      data,
-      tab
-    });
   }
 });
 

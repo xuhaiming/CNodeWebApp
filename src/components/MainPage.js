@@ -1,16 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import Tabs from './Tabs';
-import { get } from '../api/client';
 
-class MainPage extends Component {
-  render() {
-    return (
-      <div>
-        <Tabs />
-      </div>
-    );
-  }
-}
+const MainPage = () => (
+  <div>
+    <Tabs />
+  </div>
+);
 
 export default MainPage;

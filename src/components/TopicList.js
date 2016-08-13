@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import TopicItem from './TopicItem';
+import { get } from '../api/client';
 import CircularProgress from 'material-ui/CircularProgress';
 
 const styles = {
@@ -11,15 +11,25 @@ const styles = {
 };
 
 class TopicList extends Component {
-  render() {
-    const topics = this.props.topics;
-    const tabName = this.props.location;
+  constructor() {
+    super();
 
-    if (!topics[tabName]) {
+    this.state = {};
+  }
+
+  render() {
+    const tabName = this.props.tabName;
+    const isActive = this.props.isActive;
+
+    if (!this.state.data) {
+      if (isActive) {
+        get('topics', { tab: tabName }).then(data => this.setState({ data }));
+      }
+
       return <CircularProgress style={styles.progress} size={2} />;
     }
 
-    const topicList = topics[tabName].map(topic => <TopicItem key={topic.id} topic={topic} />);
+    const topicList = this.state.data.map(topic => <TopicItem key={topic.id} topic={topic} />);
 
     return (
       <div>
@@ -30,15 +40,8 @@ class TopicList extends Component {
 }
 
 TopicList.propTypes = {
-  topics: React.PropTypes.object.isRequired,
-  location: React.PropTypes.string.isRequired
+  tabName: React.PropTypes.string.isRequired,
+  isActive: React.PropTypes.bool.isRequired
 };
 
-const mapStateToProps = state => ({
-  topics: state.topics,
-  location: state.routing.locationBeforeTransitions.pathname.replace('/', '')
-});
-
-export default connect(
-  mapStateToProps
-)(TopicList);
+export default TopicList;
