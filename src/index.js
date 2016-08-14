@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 import MainPage from './components/MainPage';
+import Header from './components/Header';
 import TopicPage from './components/TopicPage.js';
 import { Router, Route, useRouterHistory } from 'react-router';
 import { createHashHistory } from 'history';
@@ -27,11 +28,14 @@ const App = () => {
   return (
     <Provider store={store}>
       <MuiThemeProvider>
-        <Router history={reduxHistory}>
-          <Route path="/" component={MainPage} />
-          <Route path="/:tabName" component={MainPage} />
-          <Route path="/topic/:topicId" component={TopicPage} />
-        </Router>
+        <div>
+          <Header />
+          <Router history={reduxHistory}>
+            <Route path="/" component={MainPage}/>
+            <Route path="/:tabName" component={MainPage}/>
+            <Route path="/topic/:topicId" component={TopicPage}/>
+          </Router>
+        </div>
       </MuiThemeProvider>
     </Provider>
   );

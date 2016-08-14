@@ -10,6 +10,10 @@ const tabNames = ['all', 'good', 'share', 'ask', 'job'];
 const styles = {
   swipeContainer: {
     height: '100%'
+  },
+  tabs: {
+    backgroundColor: '#80bd01',
+    color: '#f6f6f6'
   }
 };
 
@@ -49,7 +53,11 @@ class NavBar extends Component {
 
     return (
       <div>
-        <Tabs onChange={this.handleChange} value={this.getSlideIndex()} >
+        <Tabs
+          tabItemContainerStyle={styles.tabs}
+          onChange={this.handleChange}
+          value={this.getSlideIndex()}
+        >
           {navItems}
         </Tabs>
         <SwipeableViews
