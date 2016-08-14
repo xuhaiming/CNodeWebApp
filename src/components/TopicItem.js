@@ -37,4 +37,3 @@ export default connect(
   mapDispatchToProps
 )(TopicItem);
 
-
