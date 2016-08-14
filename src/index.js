@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 import MainPage from './components/MainPage';
+import TopicPage from './components/TopicPage.js';
 import { Router, Route, useRouterHistory } from 'react-router';
 import { createHashHistory } from 'history';
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
@@ -12,12 +13,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 injectTapEventPlugin();
-
-const RootContainer = () => (
-  <MuiThemeProvider>
-    <MainPage />
-  </MuiThemeProvider>
-);
 
 const App = () => {
   const history = useRouterHistory(createHashHistory)({ queryKey: false });
@@ -31,10 +26,13 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <Router history={reduxHistory}>
-        <Route path="/" component={RootContainer} />
-        <Route path="/:tabName" component={RootContainer} />
-      </Router>
+      <MuiThemeProvider>
+        <Router history={reduxHistory}>
+          <Route path="/" component={MainPage} />
+          <Route path="/:tabName" component={MainPage} />
+          <Route path="/topic/:topicId" component={TopicPage} />
+        </Router>
+      </MuiThemeProvider>
     </Provider>
   );
 };
