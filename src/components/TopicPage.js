@@ -3,13 +3,7 @@ import { connect } from 'react-redux';
 import CircularProgress from 'material-ui/CircularProgress';
 import { get } from '../api/client';
 import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
-
-const styles = {
-  progress: {
-    margin: '250px auto',
-    display: 'block'
-  }
-};
+import styles from '../styles';
 
 class TopicPage extends Component {
   constructor(props) {

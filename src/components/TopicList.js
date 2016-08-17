@@ -2,13 +2,7 @@ import React, { Component } from 'react';
 import TopicItem from './TopicItem';
 import { get } from '../api/client';
 import CircularProgress from 'material-ui/CircularProgress';
-
-const styles = {
-  progress: {
-    margin: '250px auto',
-    display: 'block'
-  }
-};
+import styles from '../styles';
 
 class TopicList extends Component {
   constructor(props) {

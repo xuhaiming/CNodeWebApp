@@ -2,16 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
 import { push } from 'react-router-redux';
-
-const styles = {
-  titleContainer: {
-    margin: 0,
-    height: 65
-  },
-  title: {
-    margin: 0
-  }
-};
+import styles from '../styles';
 
 const TopicItem = ({ topic, goToDetailPage }) => (
   <RaisedButton fullWidth style={styles.titleContainer} onClick={() => goToDetailPage(topic)}>

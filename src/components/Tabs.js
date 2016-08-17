@@ -4,18 +4,9 @@ import { Tabs, Tab } from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
 import TopicList from './TopicList';
 import { push } from 'react-router-redux';
+import styles from '../styles';
 
 const tabNames = ['all', 'good', 'share', 'ask', 'job'];
-
-const styles = {
-  swipeContainer: {
-    height: '100%'
-  },
-  tabs: {
-    backgroundColor: '#80bd01',
-    color: '#f6f6f6'
-  }
-};
 
 class NavBar extends Component {
   constructor(props) {

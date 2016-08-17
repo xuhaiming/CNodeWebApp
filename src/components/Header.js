@@ -2,21 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
 import { push } from 'react-router-redux';
-
-const styles = {
-  headerContainer: {
-    backgroundColor: '#444'
-  },
-  imageContainer: {
-    width: 120,
-    margin: '10px 20px'
-  }
-};
+import logo from '../../assets/logo.png';
+import styles from '../styles';
 
 const Header = ({ goToHomePage }) => (
   <div style={styles.headerContainer}>
     <FlatButton style={styles.imageContainer} onClick={() => goToHomePage()}>
-      <img alt="logo" src="//o4j806krb.qnssl.com/public/images/cnodejs_light.svg" />
+      <img alt="logo" src={logo.substring(1)} style={styles.logo} />
     </FlatButton>
   </div>
 );

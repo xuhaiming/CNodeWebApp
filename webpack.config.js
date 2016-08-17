@@ -7,7 +7,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'build'),
     filename: 'main.js',
-    publicPath: '/static/'
+    publicPath: '/build/'
   },
   module: {
     loaders: [
@@ -15,6 +15,9 @@ module.exports = {
         test: /\.jsx?$/,
         loaders: ['babel-loader?presets[]=react,presets[]=es2015'],
         exclude: /node_modules/
+      },
+      { test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
+        loader: 'file'
       }
     ]
   }
