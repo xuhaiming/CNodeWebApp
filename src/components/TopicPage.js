@@ -18,7 +18,7 @@ class TopicPage extends Component {
     if (!topic) {
       get(this.props.location).then(data => this.setState({ data }));
 
-      return <CircularProgress style={styles.progress} size={2} />;
+      return <CircularProgress style={styles.progress} size={1.5} />;
     }
 
     return (

@@ -20,7 +20,7 @@ class TopicList extends Component {
         get('topics', { tab: tabName }).then(data => this.setState({ data }));
       }
 
-      return <CircularProgress style={styles.progress} size={2} />;
+      return <CircularProgress style={styles.progress} size={1.5} />;
     }
 
     const topicList = this.state.data.map(topic => <TopicItem key={topic.id} topic={topic} />);
