@@ -4,6 +4,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 import { get } from '../api/client';
 import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
 import styles from '../styles';
+import CommentItem from './CommentItem';
 
 class TopicPage extends Component {
   constructor(props) {
@@ -21,18 +22,26 @@ class TopicPage extends Component {
       return <CircularProgress style={styles.progress} size={1.5} />;
     }
 
+    const commentList = topic.replies && topic.replies.map(reply => (
+      <CommentItem key={reply.id} comment={reply} />
+    ));
+
     return (
-      <Card>
-        <CardHeader
-          title={topic.title}
-          subtitle={topic.author.loginname}
-          avatar={topic.author.avatar_url}
-        />
-        <CardTitle title={topic.title} subtitle={topic.create_at} />
-        <CardText>
-          <div dangerouslySetInnerHTML={{ __html: topic.content }}></div>
-        </CardText>
-      </Card>
+      <div style={styles.topicDetailContainer}>
+        <Card>
+          <CardHeader
+            title={topic.title}
+            subtitle={topic.author.loginname}
+            avatar={topic.author.avatar_url}
+          />
+          <CardTitle title={topic.title} subtitle={topic.create_at} />
+          <CardText>
+            <div dangerouslySetInnerHTML={{ __html: topic.content }}></div>
+          </CardText>
+        </Card>
+        <h3>{commentList.length === 0 ? '无评论' : `评论(${commentList.length})`}</h3>
+        {commentList}
+      </div>
     );
   }
 }

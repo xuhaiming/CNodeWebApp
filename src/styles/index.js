@@ -56,6 +56,12 @@ const styles = {
   topicItemTitle: {
     margin: 0
   },
+  topicDetailContainer: {
+    padding: '65px 10px 0'
+  },
+  commentContainer: {
+    margin: '10px 0'
+  },
   progress: {
     margin: '250px auto',
     display: 'block'
