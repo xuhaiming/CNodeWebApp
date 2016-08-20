@@ -4,9 +4,8 @@ import { Tabs, Tab } from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
 import TopicList from './TopicList';
 import { push } from 'react-router-redux';
+import tabNames from '../constants/tabNames';
 import styles from '../styles';
-
-const tabNames = ['all', 'good', 'share', 'ask', 'job'];
 
 class NavBar extends Component {
   constructor(props) {
@@ -20,11 +19,11 @@ class NavBar extends Component {
   }
 
   getSlideIndex() {
-    return tabNames.indexOf(this.getLocation());
+    return tabNames.findIndex(tab => this.getLocation() === tab.key);
   }
 
   handleChange(index) {
-    const urlTab = tabNames[index] === 'all' ? '' : tabNames[index];
+    const urlTab = tabNames[index].key === 'all' ? '' : tabNames[index].key;
 
     this.props.switchTab(`/${urlTab}`);
   }
@@ -34,12 +33,12 @@ class NavBar extends Component {
   }
 
   render() {
-    const navItems = tabNames.map((name, index) => (
-      <Tab key={name} label={name} value={index} />
+    const navItems = tabNames.map((tab, index) => (
+      <Tab key={tab.key} label={tab.value} value={index} />
     ));
 
-    const topicLists = tabNames.map(name => (
-      <TopicList key={name} tabName={name} isActive={this.isActive(name)} />
+    const topicLists = tabNames.map(({ key }) => (
+      <TopicList key={key} tabName={key} isActive={this.isActive(key)} />
     ));
 
     return (
