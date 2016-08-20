@@ -45,6 +45,7 @@ class NavBar extends Component {
     return (
       <div>
         <Tabs
+          style={styles.tabsContainer}
           tabItemContainerStyle={styles.tabs}
           onChange={this.handleChange}
           value={this.getSlideIndex()}
@@ -55,6 +56,7 @@ class NavBar extends Component {
           index={this.getSlideIndex()}
           onChangeIndex={this.handleChange}
           containerStyle={styles.swipeContainer}
+          slideStyle={styles.swipeSlide}
         >
           {topicLists}
         </SwipeableViews>

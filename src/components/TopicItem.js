@@ -5,8 +5,21 @@ import { push } from 'react-router-redux';
 import styles from '../styles';
 
 const TopicItem = ({ topic, goToDetailPage }) => (
-  <RaisedButton fullWidth style={styles.titleContainer} onClick={() => goToDetailPage(topic)}>
-    <h3 style={styles.title}>{topic.title}</h3>
+  <RaisedButton
+    style={styles.topicItemTitleContainer}
+    onClick={() => goToDetailPage(topic)}
+  >
+    <div style={styles.topicItemContainer}>
+      <img
+        src={topic.author.avatar_url}
+        alt={topic.author.loginname}
+        style={styles.topicItemAvatar}
+      />
+      <span style={styles.topicItemContent}>
+        <h4 style={styles.topicItemTitle}>{topic.title}</h4>
+        <p style={{}}>{topic.author.loginname}</p>
+      </span>
+    </div>
   </RaisedButton>
 );
 
