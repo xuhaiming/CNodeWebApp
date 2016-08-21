@@ -5,8 +5,8 @@ import { push } from 'react-router-redux';
 
 const styles = {
   topicItemTitleContainer: {
-    margin: '5px 20px',
-    width: 'calc(100% - 40px)',
+    margin: '5px 10px',
+    width: 'calc(100% - 20px)',
     height: 'auto'
   },
   topicItemContainer: {
