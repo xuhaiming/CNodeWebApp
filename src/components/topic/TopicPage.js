@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CircularProgress from 'material-ui/CircularProgress';
-import { get } from '../api/client';
+import { get } from '../../api/client';
 import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
 import CommentItem from './CommentItem';
-import commonStyle from '../styles/common';
+import commonStyle from '../../styles/common';
 import Highlight from 'react-highlight';
 
 const styles = {

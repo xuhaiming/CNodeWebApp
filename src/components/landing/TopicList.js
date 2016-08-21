@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import TopicItem from './TopicItem';
-import { get } from '../api/client';
+import { get } from '../../api/client';
 import CircularProgress from 'material-ui/CircularProgress';
-import commonStyle from '../styles/common';
+import commonStyle from '../../styles/common';
 
 const styles = {
   progress: commonStyle.progress

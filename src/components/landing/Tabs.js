@@ -4,7 +4,7 @@ import { Tabs, Tab } from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
 import TopicList from './TopicList';
 import { push } from 'react-router-redux';
-import tabNames from '../constants/tabNames';
+import tabNames from '../../constants/tabNames';
 
 const styles = {
   swipeContainer: {
