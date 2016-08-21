@@ -28,6 +28,7 @@
   "dependencies": {
     "history": "2.1.2",
     "material-ui": "^0.15.2",
+    "radium": "^0.18.1",
     "react": "^15.2.1",
     "react-motion": "^0.4.4",
     "react-redux": "^4.4.5",
