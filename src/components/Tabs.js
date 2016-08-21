@@ -8,12 +8,8 @@ import tabNames from '../constants/tabNames';
 
 const styles = {
   swipeContainer: {
-    height: '100%',
-    paddingBottom: 60,
+    height: 'calc(100vh - 110px)',
     marginTop: 65
-  },
-  swipeSlide: {
-    overflowY: 'hidden'
   },
   tabsContainer: {
     position: 'fixed',
@@ -75,7 +71,6 @@ class NavBar extends Component {
           index={this.getSlideIndex()}
           onChangeIndex={this.handleChange}
           containerStyle={styles.swipeContainer}
-          slideStyle={styles.swipeSlide}
         >
           {topicLists}
         </SwipeableViews>
