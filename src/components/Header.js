@@ -3,7 +3,24 @@ import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
 import { push } from 'react-router-redux';
 import logo from '../../assets/logo.png';
-import styles from '../styles';
+
+const styles = {
+  headerContainer: {
+    position: 'fixed',
+    zIndex: 1,
+    width: '100%',
+    backgroundColor: 'white',
+    borderBottom: '1px solid #e1e1e1'
+  },
+  logo: {
+    width: 120,
+    height: 'auto'
+  },
+  imageContainer: {
+    width: 120,
+    margin: '10px 20px'
+  }
+};
 
 const Header = ({ goToHomePage }) => (
   <div style={styles.headerContainer}>

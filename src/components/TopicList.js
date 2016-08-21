@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import TopicItem from './TopicItem';
 import { get } from '../api/client';
 import CircularProgress from 'material-ui/CircularProgress';
-import styles from '../styles';
+import commonStyle from '../styles/common';
+
+const styles = {
+  progress: commonStyle.progress
+};
 
 class TopicList extends Component {
   constructor(props) {

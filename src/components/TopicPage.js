@@ -3,8 +3,18 @@ import { connect } from 'react-redux';
 import CircularProgress from 'material-ui/CircularProgress';
 import { get } from '../api/client';
 import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
-import styles from '../styles';
 import CommentItem from './CommentItem';
+import commonStyle from '../styles/common';
+
+const styles = {
+  topicDetailContainer: {
+    padding: '65px 10px 0'
+  },
+  title: {
+    fontWeight: 'bold'
+  },
+  progress: commonStyle.progress
+};
 
 class TopicPage extends Component {
   constructor(props) {
@@ -30,11 +40,12 @@ class TopicPage extends Component {
       <div style={styles.topicDetailContainer}>
         <Card>
           <CardHeader
-            title={topic.title}
-            subtitle={topic.author.loginname}
+            title={topic.author.loginname}
+            subtitle={topic.create_at}
             avatar={topic.author.avatar_url}
+            titleStyle={styles.title}
           />
-          <CardTitle title={topic.title} subtitle={topic.create_at} />
+          <CardTitle title={topic.title} titleStyle={styles.title} />
           <CardText>
             <div dangerouslySetInnerHTML={{ __html: topic.content }}></div>
           </CardText>

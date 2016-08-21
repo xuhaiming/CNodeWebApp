@@ -1,6 +1,11 @@
 import React from 'react';
 import { Card, CardHeader, CardText } from 'material-ui/Card';
-import styles from '../styles';
+
+const styles = {
+  commentContainer: {
+    margin: '10px 0'
+  }
+};
 
 const CommentItem = ({ comment }) => (
   <Card containerStyle={styles.commentContainer}>

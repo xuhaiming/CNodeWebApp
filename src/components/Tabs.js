@@ -5,7 +5,27 @@ import SwipeableViews from 'react-swipeable-views';
 import TopicList from './TopicList';
 import { push } from 'react-router-redux';
 import tabNames from '../constants/tabNames';
-import styles from '../styles';
+
+const styles = {
+  swipeContainer: {
+    height: '100%',
+    paddingBottom: 60,
+    marginTop: 65
+  },
+  swipeSlide: {
+    overflowY: 'hidden'
+  },
+  tabsContainer: {
+    position: 'fixed',
+    width: '100%',
+    bottom: 0,
+    zIndex: 1
+  },
+  tabs: {
+    backgroundColor: '#80bd01',
+    color: '#f6f6f6'
+  }
+};
 
 class NavBar extends Component {
   constructor(props) {

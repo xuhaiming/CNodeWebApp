@@ -2,7 +2,30 @@ import React from 'react';
 import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
 import { push } from 'react-router-redux';
-import styles from '../styles';
+
+const styles = {
+  topicItemTitleContainer: {
+    margin: '5px 20px',
+    width: 'calc(100% - 40px)',
+    height: 'auto'
+  },
+  topicItemContainer: {
+    textAlign: 'left',
+    padding: '10px 15px'
+  },
+  topicItemAvatar: {
+    width: 30,
+    display: 'inline-block'
+  },
+  topicItemContent: {
+    display: 'inline-block',
+    marginLeft: 15,
+    maxWidth: 'calc(100% - 180px)'
+  },
+  topicItemTitle: {
+    margin: 0
+  }
+};
 
 const TopicItem = ({ topic, goToDetailPage }) => (
   <RaisedButton
