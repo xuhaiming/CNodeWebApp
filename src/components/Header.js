@@ -8,6 +8,7 @@ const styles = {
   headerContainer: {
     position: 'fixed',
     zIndex: 1,
+    top: 0,
     width: '100%',
     backgroundColor: 'white',
     borderBottom: '1px solid #e1e1e1'

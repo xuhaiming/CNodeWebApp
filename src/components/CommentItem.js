@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardHeader, CardText } from 'material-ui/Card';
+import Highlight from 'react-highlight';
 
 const styles = {
   commentContainer: {
@@ -15,7 +16,9 @@ const CommentItem = ({ comment }) => (
       avatar={comment.author.avatar_url}
     />
     <CardText>
-      <div dangerouslySetInnerHTML={{ __html: comment.content }}></div>
+      <Highlight innerHTML>
+        {comment.content}
+      </Highlight>
     </CardText>
   </Card>
 );

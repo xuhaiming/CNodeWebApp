@@ -5,6 +5,7 @@ import { get } from '../api/client';
 import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
 import CommentItem from './CommentItem';
 import commonStyle from '../styles/common';
+import Highlight from 'react-highlight';
 
 const styles = {
   topicDetailContainer: {
@@ -45,9 +46,11 @@ class TopicPage extends Component {
             avatar={topic.author.avatar_url}
             titleStyle={styles.title}
           />
-          <CardTitle title={topic.title} titleStyle={styles.title} />
+          <CardTitle title={topic.title} style={styles.title} />
           <CardText>
-            <div dangerouslySetInnerHTML={{ __html: topic.content }}></div>
+            <Highlight innerHTML>
+              {topic.content}
+            </Highlight>
           </CardText>
         </Card>
         <h3>{commentList.length === 0 ? '无评论' : `评论(${commentList.length})`}</h3>
