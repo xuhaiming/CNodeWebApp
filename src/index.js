@@ -10,28 +10,12 @@ import { Router, Route, useRouterHistory } from 'react-router';
 import { createHashHistory } from 'history';
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
 import { Style } from 'radium';
+import styles from './styles/rules';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 injectTapEventPlugin();
-
-const styles = {
-  body: {
-    margin: 0
-  },
-  img: {
-    width: '100%'
-  },
-  mediaQueries: {
-    '(min-width: 768px)': {
-      img: {
-        width: 'auto',
-        maxWidth: '100%'
-      }
-    }
-  }
-};
 
 const App = () => {
   const history = useRouterHistory(createHashHistory)({ queryKey: false });
