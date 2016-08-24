@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
 import { push } from 'react-router-redux';
-import logo from '../../assets/logo.png';
-import IconButton from 'material-ui/IconButton/IconButton';
-import UserIcon from 'material-ui/svg-icons/social/person';
+import logo from '../../../assets/logo.png';
+import IconButton from '../../../node_modules/material-ui/IconButton/IconButton';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
+import MorphIcon from './MorphIcon/index';
 
 const styles = {
   headerContainer: {
@@ -80,7 +80,7 @@ class Header extends Component {
           iconStyle={styles.userIcon}
           onTouchTap={this.handleOpen}
         >
-          <UserIcon color="white" />
+          <MorphIcon />
         </IconButton>
         <Dialog
           title="登录"

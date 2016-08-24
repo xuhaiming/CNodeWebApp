@@ -2,8 +2,8 @@ export default {
   body: {
     margin: 0
   },
-  p: {
-    fontSize: 15
+  'p, li': {
+    fontSize: 16
   },
   img: {
     width: '100%'

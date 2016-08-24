@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 import MainPage from './components/landing/MainPage';
-import Header from './components/Header';
+import Header from './components/shared/Header';
 import TopicPage from './components/topic/TopicPage.js';
 import { Router, Route, useRouterHistory } from 'react-router';
 import { createHashHistory } from 'history';
