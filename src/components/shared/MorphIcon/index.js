@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { MorphReplace } from 'react-svg-morph';
-import iconPaths from './iconPaths';
 import SvgComponent from './SvgComponent';
 
 class MorphIcon extends Component {
@@ -8,7 +7,7 @@ class MorphIcon extends Component {
     super(props);
 
     this.state = {
-      onHover: false
+      onHover: true
     };
 
     this.toggleHoverState = this.toggleHoverState.bind(this);
@@ -26,9 +25,9 @@ class MorphIcon extends Component {
       >
         <MorphReplace width={30} height={30}>
           {this.state.onHover ?
-            <SvgComponent key="enterState" path={iconPaths.login} />
+            <SvgComponent key="enterState" path={this.props.originState} />
             :
-            <SvgComponent key="leaveState" path={iconPaths.person} />}
+            <SvgComponent key="leaveState" path={this.props.changedState} />}
         </MorphReplace>
       </div>
     );

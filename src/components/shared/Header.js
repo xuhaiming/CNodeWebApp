@@ -7,6 +7,7 @@ import IconButton from '../../../node_modules/material-ui/IconButton/IconButton'
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import MorphIcon from './MorphIcon/index';
+import iconPaths from './MorphIcon/iconPaths';
 
 const styles = {
   headerContainer: {
@@ -80,7 +81,7 @@ class Header extends Component {
           iconStyle={styles.userIcon}
           onTouchTap={this.handleOpen}
         >
-          <MorphIcon />
+          <MorphIcon originState={iconPaths.person} changedState={iconPaths.login} />
         </IconButton>
         <Dialog
           title="登录"
@@ -115,4 +116,3 @@ export default connect(
   null,
   mapDispatchToProps
 )(Header);
-

@@ -5,6 +5,8 @@ import SwipeableViews from 'react-swipeable-views';
 import TopicList from './TopicList';
 import { push } from 'react-router-redux';
 import tabNames from '../../constants/tabNames';
+import MorphIcon from '../shared/MorphIcon/index';
+import iconPaths from '../shared/MorphIcon/iconPaths';
 
 const styles = {
   swipeContainer: {
@@ -50,7 +52,12 @@ class NavBar extends Component {
 
   render() {
     const navItems = tabNames.map((tab, index) => (
-      <Tab key={tab.key} label={tab.value} value={index} />
+      <Tab
+        key={tab.key}
+        label={tab.value}
+        value={index}
+        icon={<MorphIcon originState={iconPaths[tab.key]} changedState={iconPaths[tab.key + "_after"]} />}
+      />
     ));
 
     const topicLists = tabNames.map(({ key }) => (
