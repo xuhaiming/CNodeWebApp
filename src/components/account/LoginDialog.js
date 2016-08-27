@@ -35,15 +35,15 @@ class LoginDialog extends Component {
   handleConfirm() {
     this.props.toggleDialog();
     post('accesstoken', { accesstoken: this.state.tokenInput })
-      .then(data => console.log(data))
-      .catch(err => console.log(err));
+      .then(data => this.props.showToast(`Hi ${data.loginname}, 登录成功!`))
+      .catch(() => this.props.showToast('登录失败'));
   }
 
   handleInputChange(event) {
     this.setState({
       tokenInput: event.target.value
     });
-  };
+  }
 
   render() {
     const actions = [
@@ -75,7 +75,8 @@ class LoginDialog extends Component {
 
 LoginDialog.propTypes = {
   toggleDialog: React.PropTypes.func.isRequired,
-  dialogOpen: React.PropTypes.bool.isRequired
+  dialogOpen: React.PropTypes.bool.isRequired,
+  showToast: React.PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -85,6 +86,12 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   toggleDialog: () => {
     dispatch(toggleLoginDialog);
+  },
+  showToast: message => {
+    dispatch({
+      type: 'TOAST_SHOW',
+      message
+    });
   }
 });
 

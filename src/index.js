@@ -5,6 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 import MainPage from './components/landing/MainPage';
 import Header from './components/shared/Header';
+import Toast from './components/shared/Toast';
 import TopicPage from './components/topic/TopicPage.js';
 import { Router, Route, useRouterHistory } from 'react-router';
 import { createHashHistory } from 'history';
@@ -38,6 +39,7 @@ const App = () => {
             <Route path="/:tabName" component={MainPage} />
             <Route path="/topic/:topicId" component={TopicPage} />
           </Router>
+          <Toast />
         </div>
       </MuiThemeProvider>
     </Provider>
