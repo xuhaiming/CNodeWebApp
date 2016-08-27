@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
 import { push } from 'react-router-redux';
 import logo from '../../../assets/logo.png';
+import { toggleLoginDialog } from '../../actions/dialog';
+import LoginDialog from '../account/LoginDialog';
 import IconButton from '../../../node_modules/material-ui/IconButton/IconButton';
-import Dialog from 'material-ui/Dialog';
-import TextField from 'material-ui/TextField';
 import MorphIcon from './MorphIcon/index';
 import iconPaths from './MorphIcon/iconPaths';
 
@@ -35,42 +35,21 @@ const styles = {
     borderRadius: '50%',
     width: 26,
     height: 26
-  },
-  tokenInput: {
-    width: '100%'
-  },
-  dialog: {
-    maxWidth: 350
   }
 };
 
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      dialogOpen: false
-    };
 
-    this.handleOpen = this.handleOpen.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    this.openLoginDialog = this.openLoginDialog.bind(this);
   }
 
-  handleOpen() {
-    this.setState({ dialogOpen: true });
-  }
-
-  handleClose() {
-    this.setState({ dialogOpen: false });
+  openLoginDialog() {
+    this.props.toggleLoginDialog();
   }
 
   render() {
-    const actions = [
-      <FlatButton
-        label="确定"
-        onTouchTap={this.handleClose}
-      />
-    ];
-
     return (
       <div style={styles.headerContainer}>
         <FlatButton style={styles.imageContainer} onClick={() => this.props.goToHomePage()}>
@@ -79,7 +58,7 @@ class Header extends Component {
         <IconButton
           style={styles.userButton}
           iconStyle={styles.userIcon}
-          onTouchTap={this.handleOpen}
+          onTouchTap={this.openLoginDialog}
         >
           <MorphIcon
             originState={iconPaths.person}
@@ -87,32 +66,23 @@ class Header extends Component {
             fill="black"
           />
         </IconButton>
-        <Dialog
-          title="登录"
-          actions={actions}
-          modal={false}
-          open={this.state.dialogOpen}
-          onRequestClose={this.handleClose}
-          contentStyle={styles.dialog}
-        >
-          <div>请输入Access Token:</div>
-          <TextField
-            style={styles.tokenInput}
-            hintText="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-          />
-        </Dialog>
+        <LoginDialog />
       </div>
     );
   }
 }
 
 Header.propTypes = {
-  goToHomePage: React.PropTypes.func.isRequired
+  goToHomePage: React.PropTypes.func.isRequired,
+  toggleLoginDialog: React.PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = dispatch => ({
   goToHomePage: () => {
     dispatch(push('/'));
+  },
+  toggleLoginDialog: () => {
+    dispatch(toggleLoginDialog);
   }
 });
 
