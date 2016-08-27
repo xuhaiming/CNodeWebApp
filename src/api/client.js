@@ -17,4 +17,19 @@ const get = (page, config) => (
   })
 );
 
-export { get };
+const post = (page, requestBody) => (
+  new Promise((resolve, reject) => {
+    request
+      .post(`${baseUrl}${page}`)
+      .set('Content-Type', 'application/json')
+      .send(Object.assign({}, requestBody))
+      .end((err, res) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(res.body);
+      });
+  })
+);
+
+export { get, post };

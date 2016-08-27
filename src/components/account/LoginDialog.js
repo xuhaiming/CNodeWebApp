@@ -4,6 +4,7 @@ import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import { toggleLoginDialog } from '../../actions/dialog';
+import { post } from '../../api/client';
 
 const styles = {
   tokenInput: {
@@ -18,8 +19,13 @@ class LoginDialog extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      tokenInput: ''
+    };
+
     this.handleClose = this.handleClose.bind(this);
     this.handleConfirm = this.handleConfirm.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   handleClose() {
@@ -28,7 +34,16 @@ class LoginDialog extends Component {
 
   handleConfirm() {
     this.props.toggleDialog();
+    post('accesstoken', { accesstoken: this.state.tokenInput })
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
   }
+
+  handleInputChange(event) {
+    this.setState({
+      tokenInput: event.target.value
+    });
+  };
 
   render() {
     const actions = [
@@ -50,6 +65,7 @@ class LoginDialog extends Component {
         <div>请输入Access Token:</div>
         <TextField
           style={styles.tokenInput}
+          onChange={this.handleInputChange}
           hintText="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
         />
       </Dialog>
