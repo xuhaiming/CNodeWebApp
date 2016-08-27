@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 import { MorphReplace } from 'react-svg-morph';
 import SvgComponent from './SvgComponent';
 
+const styles = {
+  iconContainer: {
+    zIndex: 1
+  }
+};
+
 class MorphIcon extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      onHover: true
+      onHover: false
     };
 
     this.toggleHoverState = this.toggleHoverState.bind(this);
@@ -22,16 +28,23 @@ class MorphIcon extends Component {
       <div
         onMouseEnter={this.toggleHoverState}
         onMouseLeave={this.toggleHoverState}
+        style={styles.iconContainer}
       >
         <MorphReplace width={30} height={30}>
           {this.state.onHover ?
-            <SvgComponent key="enterState" path={this.props.originState} />
+            <SvgComponent key="enterState" path={this.props.hoverState} {...this.props} />
             :
-            <SvgComponent key="leaveState" path={this.props.changedState} />}
+            <SvgComponent key="leaveState" path={this.props.originState} {...this.props} />}
         </MorphReplace>
       </div>
     );
   }
 }
+
+MorphIcon.propTypes = {
+  originState: React.PropTypes.string.isRequired,
+  hoverState: React.PropTypes.string.isRequired
+};
+
 
 export default MorphIcon;

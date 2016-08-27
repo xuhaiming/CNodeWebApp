@@ -10,7 +10,7 @@ import iconPaths from '../shared/MorphIcon/iconPaths';
 
 const styles = {
   swipeContainer: {
-    height: 'calc(100vh - 110px)',
+    height: 'calc(100vh - 140px)',
     marginTop: 65
   },
   tabsContainer: {
@@ -51,12 +51,19 @@ class NavBar extends Component {
   }
 
   render() {
+    const itemIcon = tab => (
+      <MorphIcon
+        originState={iconPaths[tab.key]}
+        hoverState={iconPaths[`${tab.key}_after`]}
+      />
+    );
+
     const navItems = tabNames.map((tab, index) => (
       <Tab
         key={tab.key}
         label={tab.value}
         value={index}
-        icon={<MorphIcon originState={iconPaths[tab.key]} changedState={iconPaths[tab.key + "_after"]} />}
+        icon={itemIcon(tab)}
       />
     ));
 

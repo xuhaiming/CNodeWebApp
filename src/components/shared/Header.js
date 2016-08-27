@@ -81,7 +81,11 @@ class Header extends Component {
           iconStyle={styles.userIcon}
           onTouchTap={this.handleOpen}
         >
-          <MorphIcon originState={iconPaths.person} changedState={iconPaths.login} />
+          <MorphIcon
+            originState={iconPaths.person}
+            hoverState={iconPaths.login}
+            fill="black"
+          />
         </IconButton>
         <Dialog
           title="登录"
