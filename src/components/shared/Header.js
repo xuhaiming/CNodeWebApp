@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import Avatar from 'material-ui/Avatar';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import IconButton from 'material-ui/IconButton';
 import { push } from 'react-router-redux';
 import logo from '../../../assets/logo.png';
 import { toggleLoginDialog } from '../../actions/dialog';
 import LoginDialog from '../account/LoginDialog';
-import IconButton from '../../../node_modules/material-ui/IconButton/IconButton';
 import MorphIcon from './MorphIcon/index';
 import iconPaths from './MorphIcon/iconPaths';
 
@@ -33,8 +37,12 @@ const styles = {
   userIcon: {
     backgroundColor: '#80bd01',
     borderRadius: '50%',
-    width: 26,
-    height: 26
+    width: 35,
+    height: 35
+  },
+  avatarStyle: {
+    width: 35,
+    height: 35
   }
 };
 
@@ -50,22 +58,40 @@ class Header extends Component {
   }
 
   render() {
+    const user = this.props.user;
+    const userButton = user ? (
+      <IconMenu
+        iconButtonElement={(
+          <IconButton>
+            <Avatar src={user.avatar_url} style={styles.avatarStyle} />
+          </IconButton>
+        )}
+        anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+        targetOrigin={{horizontal: 'left', vertical: 'bottom'}}
+      >
+        <MenuItem primaryText="个人信息" />
+        <MenuItem primaryText="登出" />
+      </IconMenu>
+    ) : (
+      <FloatingActionButton
+        style={styles.userButton}
+        iconStyle={styles.userIcon}
+        onTouchTap={this.openLoginDialog}
+      >
+        <MorphIcon
+          originState={iconPaths.person}
+          hoverState={iconPaths.login}
+          fill="black"
+        />
+      </FloatingActionButton>
+    );
+
     return (
       <div style={styles.headerContainer}>
         <FlatButton style={styles.imageContainer} onClick={() => this.props.goToHomePage()}>
           <img alt="logo" src={logo.substring(1)} style={styles.logo} />
         </FlatButton>
-        <IconButton
-          style={styles.userButton}
-          iconStyle={styles.userIcon}
-          onTouchTap={this.openLoginDialog}
-        >
-          <MorphIcon
-            originState={iconPaths.person}
-            hoverState={iconPaths.login}
-            fill="black"
-          />
-        </IconButton>
+        {userButton}
         <LoginDialog />
       </div>
     );
@@ -74,8 +100,13 @@ class Header extends Component {
 
 Header.propTypes = {
   goToHomePage: React.PropTypes.func.isRequired,
-  toggleLoginDialog: React.PropTypes.func.isRequired
+  toggleLoginDialog: React.PropTypes.func.isRequired,
+  user: React.PropTypes.object
 };
+
+const mapStateToProps = state => ({
+  user: state.user
+});
 
 const mapDispatchToProps = dispatch => ({
   goToHomePage: () => {
@@ -87,6 +118,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Header);

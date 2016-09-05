@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import cookie from 'react-cookie';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
@@ -26,16 +27,23 @@ class LoginDialog extends Component {
     this.handleClose = this.handleClose.bind(this);
     this.handleConfirm = this.handleConfirm.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSucessLogin = this.handleSucessLogin.bind(this);
   }
 
   handleClose() {
     this.props.toggleDialog();
   }
 
+  handleSucessLogin(data) {
+    cookie.save('user', data);
+    this.props.login(data);
+    this.props.showToast(`Hi ${data.loginname}, 登录成功!`);
+  }
+
   handleConfirm() {
     this.props.toggleDialog();
     post('accesstoken', { accesstoken: this.state.tokenInput })
-      .then(data => this.props.showToast(`Hi ${data.loginname}, 登录成功!`))
+      .then(this.handleSucessLogin)
       .catch(() => this.props.showToast('登录失败'));
   }
 
@@ -76,7 +84,8 @@ class LoginDialog extends Component {
 LoginDialog.propTypes = {
   toggleDialog: React.PropTypes.func.isRequired,
   dialogOpen: React.PropTypes.bool.isRequired,
-  showToast: React.PropTypes.func.isRequired
+  showToast: React.PropTypes.func.isRequired,
+  login: React.PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -91,6 +100,12 @@ const mapDispatchToProps = dispatch => ({
     dispatch({
       type: 'TOAST_SHOW',
       message
+    });
+  },
+  login: user => {
+    dispatch({
+      type: 'USER_LOGIN',
+      user
     });
   }
 });
