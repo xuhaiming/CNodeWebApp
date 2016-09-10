@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 
 class SvgComponent extends Component { // eslint-disable-line react/prefer-stateless-function
   render() {
+    const size = this.props.size;
+
     return (
-      <svg width="30" height="30" fill={this.props.fill} viewBox="0 0 30 30">
+      <svg width={size} height={size} fill={this.props.fill} viewBox={`0 0 ${size} ${size}`}>
         <path d={this.props.path} />
       </svg>
     );
@@ -12,9 +14,10 @@ class SvgComponent extends Component { // eslint-disable-line react/prefer-state
 
 SvgComponent.propTypes = {
   path: React.PropTypes.string.isRequired,
-  fill: React.PropTypes.string
+  fill: React.PropTypes.string,
+  size: React.PropTypes.number
 };
 
-SvgComponent.defaultProps = { fill: 'white' };
+SvgComponent.defaultProps = { fill: 'white', size: 30 };
 
 export default SvgComponent;

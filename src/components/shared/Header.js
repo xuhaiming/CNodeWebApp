@@ -5,13 +5,15 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Avatar from 'material-ui/Avatar';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
-import IconButton from 'material-ui/IconButton';
 import { push } from 'react-router-redux';
 import logo from '../../../assets/logo.png';
-import { toggleLoginDialog } from '../../actions/dialog';
+import toggleLoginDialog from '../../actions/toggleDialog';
+import showToast from '../../actions/showToast';
 import LoginDialog from '../account/LoginDialog';
 import MorphIcon from './MorphIcon/index';
 import iconPaths from './MorphIcon/iconPaths';
+
+const ICON_SIZE = 35;
 
 const styles = {
   headerContainer: {
@@ -32,17 +34,29 @@ const styles = {
   },
   userButton: {
     position: 'absolute',
-    right: 10
+    right: 15,
+    top: 10
   },
   userIcon: {
     backgroundColor: '#80bd01',
     borderRadius: '50%',
-    width: 35,
-    height: 35
+    width: ICON_SIZE,
+    height: ICON_SIZE
   },
-  avatarStyle: {
-    width: 35,
-    height: 35
+  avatarContainer: {
+    position: 'static'
+  },
+  avatar: {
+    width: ICON_SIZE,
+    height: ICON_SIZE
+  },
+  anchorOrigin: {
+    horizontal: 'right',
+    vertical: 'bottom'
+  },
+  targetOrigin: {
+    horizontal: 'right',
+    vertical: 'top'
   }
 };
 
@@ -51,26 +65,36 @@ class Header extends Component {
     super(props);
 
     this.openLoginDialog = this.openLoginDialog.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   openLoginDialog() {
     this.props.toggleLoginDialog();
   }
 
+  logout() {
+    this.props.showToast('登出成功');
+    this.props.logout();
+  }
+
   render() {
     const user = this.props.user;
-    const userButton = user ? (
+    const userButton = user.id ? (
       <IconMenu
+        style={styles.avatarContainer}
+        anchorOrigin={styles.anchorOrigin}
+        targetOrigin={styles.targetOrigin}
         iconButtonElement={(
-          <IconButton>
-            <Avatar src={user.avatar_url} style={styles.avatarStyle} />
-          </IconButton>
+          <FloatingActionButton
+            style={styles.userButton}
+            iconStyle={styles.userIcon}
+          >
+            <Avatar src={user.avatar_url} style={styles.avatar} />
+          </FloatingActionButton>
         )}
-        anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-        targetOrigin={{horizontal: 'left', vertical: 'bottom'}}
       >
         <MenuItem primaryText="个人信息" />
-        <MenuItem primaryText="登出" />
+        <MenuItem primaryText="登出" onTouchTap={this.logout} />
       </IconMenu>
     ) : (
       <FloatingActionButton
@@ -101,7 +125,9 @@ class Header extends Component {
 Header.propTypes = {
   goToHomePage: React.PropTypes.func.isRequired,
   toggleLoginDialog: React.PropTypes.func.isRequired,
-  user: React.PropTypes.object
+  user: React.PropTypes.object,
+  logout: React.PropTypes.func.isRequired,
+  showToast: React.PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -114,7 +140,11 @@ const mapDispatchToProps = dispatch => ({
   },
   toggleLoginDialog: () => {
     dispatch(toggleLoginDialog);
-  }
+  },
+  logout: () => dispatch({
+    type: 'USER_LOGOUT'
+  }),
+  showToast: message => dispatch(showToast(message))
 });
 
 export default connect(

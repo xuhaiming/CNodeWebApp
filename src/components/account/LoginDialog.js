@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import cookie from 'react-cookie';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
-import { toggleLoginDialog } from '../../actions/dialog';
+import toggleLoginDialog from '../../actions/toggleDialog';
+import showToast from '../../actions/showToast';
 import { post } from '../../api/client';
 
 const styles = {
@@ -35,7 +35,6 @@ class LoginDialog extends Component {
   }
 
   handleSucessLogin(data) {
-    cookie.save('user', data);
     this.props.login(data);
     this.props.showToast(`Hi ${data.loginname}, 登录成功!`);
   }
@@ -96,18 +95,13 @@ const mapDispatchToProps = dispatch => ({
   toggleDialog: () => {
     dispatch(toggleLoginDialog);
   },
-  showToast: message => {
-    dispatch({
-      type: 'TOAST_SHOW',
-      message
-    });
-  },
   login: user => {
     dispatch({
       type: 'USER_LOGIN',
       user
     });
-  }
+  },
+  showToast: message => dispatch(showToast(message))
 });
 
 export default connect(

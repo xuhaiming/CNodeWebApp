@@ -4,7 +4,8 @@ import SvgComponent from './SvgComponent';
 
 const styles = {
   iconContainer: {
-    zIndex: 1
+    zIndex: 1,
+    padding: 5
   }
 };
 

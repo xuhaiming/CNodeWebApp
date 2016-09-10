@@ -6,7 +6,7 @@ const Toast = ({ show, message, hideToast }) => (
   <Snackbar
     open={show}
     message={message}
-    autoHideDuration={4000}
+    autoHideDuration={2000}
     onRequestClose={hideToast}
     bodyStyle={{ textAlign: 'center' }}
   />
