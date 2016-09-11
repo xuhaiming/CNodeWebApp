@@ -6,7 +6,8 @@ import reducers from './reducers';
 import MainPage from './components/landing/MainPage';
 import Header from './components/shared/Header';
 import Toast from './components/shared/Toast';
-import TopicPage from './components/topic/TopicPage.js';
+import TopicPage from './components/topic/TopicPage';
+import UserPage from './components/account/UserPage';
 import { Router, Route, useRouterHistory } from 'react-router';
 import { createHashHistory } from 'history';
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
@@ -38,6 +39,7 @@ const App = () => {
             <Route path="/" component={MainPage} />
             <Route path="/:tabName" component={MainPage} />
             <Route path="/topic/:topicId" component={TopicPage} />
+            <Route path="/user/:userId" component={UserPage} />
           </Router>
           <Toast />
         </div>

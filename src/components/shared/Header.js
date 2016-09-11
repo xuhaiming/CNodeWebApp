@@ -24,6 +24,9 @@ const styles = {
     backgroundColor: 'white',
     borderBottom: '1px solid #e1e1e1'
   },
+  placeHolder: {
+    marginTop: 65
+  },
   logo: {
     width: 120,
     height: 'auto'
@@ -66,6 +69,7 @@ class Header extends Component {
 
     this.openLoginDialog = this.openLoginDialog.bind(this);
     this.logout = this.logout.bind(this);
+    this.goToUserPage = this.goToUserPage.bind(this);
   }
 
   openLoginDialog() {
@@ -75,6 +79,10 @@ class Header extends Component {
   logout() {
     this.props.showToast('登出成功');
     this.props.logout();
+  }
+
+  goToUserPage() {
+    this.props.goToUserPage(this.props.user.loginname);
   }
 
   render() {
@@ -93,7 +101,7 @@ class Header extends Component {
           </FloatingActionButton>
         )}
       >
-        <MenuItem primaryText="个人信息" />
+        <MenuItem primaryText="个人信息" onTouchTap={this.goToUserPage} />
         <MenuItem primaryText="登出" onTouchTap={this.logout} />
       </IconMenu>
     ) : (
@@ -111,12 +119,15 @@ class Header extends Component {
     );
 
     return (
-      <div style={styles.headerContainer}>
-        <FlatButton style={styles.imageContainer} onClick={() => this.props.goToHomePage()}>
-          <img alt="logo" src={logo.substring(1)} style={styles.logo} />
-        </FlatButton>
-        {userButton}
-        <LoginDialog />
+      <div>
+        <div style={styles.placeHolder}></div>
+        <div style={styles.headerContainer}>
+          <FlatButton style={styles.imageContainer} onClick={() => this.props.goToHomePage()}>
+            <img alt="logo" src={logo.substring(1)} style={styles.logo} />
+          </FlatButton>
+          {userButton}
+          <LoginDialog />
+        </div>
       </div>
     );
   }
@@ -124,6 +135,7 @@ class Header extends Component {
 
 Header.propTypes = {
   goToHomePage: React.PropTypes.func.isRequired,
+  goToUserPage: React.PropTypes.func.isRequired,
   toggleLoginDialog: React.PropTypes.func.isRequired,
   user: React.PropTypes.object,
   logout: React.PropTypes.func.isRequired,
@@ -137,6 +149,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   goToHomePage: () => {
     dispatch(push('/'));
+  },
+  goToUserPage: userName => {
+    dispatch(push(`/user/${userName}`));
   },
   toggleLoginDialog: () => {
     dispatch(toggleLoginDialog);

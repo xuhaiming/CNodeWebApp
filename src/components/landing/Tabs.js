@@ -10,8 +10,7 @@ import iconPaths from '../shared/MorphIcon/iconPaths';
 
 const styles = {
   swipeContainer: {
-    height: 'calc(100vh - 140px)',
-    marginTop: 65
+    height: 'calc(100vh - 140px)'
   },
   tabsContainer: {
     position: 'fixed',

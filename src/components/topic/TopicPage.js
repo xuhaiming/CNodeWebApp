@@ -9,7 +9,7 @@ import Highlight from 'react-highlight';
 
 const styles = {
   topicDetailContainer: {
-    padding: '65px 10px 0'
+    padding: '0 10px'
   },
   title: {
     fontWeight: 'bold'
