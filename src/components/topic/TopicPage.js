@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import CircularProgress from 'material-ui/CircularProgress';
 import { get } from '../../api/client';
 import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
@@ -13,6 +14,9 @@ const styles = {
   },
   title: {
     fontWeight: 'bold'
+  },
+  header: {
+    cursor: 'pointer'
   },
   progress: commonStyle.progress
 };
@@ -45,6 +49,8 @@ class TopicPage extends Component {
             subtitle={topic.create_at}
             avatar={topic.author.avatar_url}
             titleStyle={styles.title}
+            style={styles.header}
+            onTouchTap={() => this.props.goToUserPage(topic.author.loginname)}
           />
           <CardTitle title={topic.title} style={styles.title} />
           <CardText>
@@ -68,6 +74,13 @@ const mapStateToProps = state => ({
   location: state.routing.locationBeforeTransitions.pathname
 });
 
+const mapDispatchToProps = dispatch => ({
+  goToUserPage: userId => {
+    dispatch(push(`/user/${userId}`));
+  }
+});
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(TopicPage);
