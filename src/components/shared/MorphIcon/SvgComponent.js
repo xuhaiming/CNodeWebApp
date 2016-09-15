@@ -18,6 +18,6 @@ SvgComponent.propTypes = {
   size: React.PropTypes.number
 };
 
-SvgComponent.defaultProps = { fill: 'white', size: 30 };
+SvgComponent.defaultProps = { fill: 'white' };
 
 export default SvgComponent;

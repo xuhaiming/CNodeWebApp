@@ -29,9 +29,9 @@ class MorphIcon extends Component {
       <div
         onMouseEnter={this.toggleHoverState}
         onMouseLeave={this.toggleHoverState}
-        style={styles.iconContainer}
+        style={Object.assign({}, styles.iconContainer, this.props.iconStyle)}
       >
-        <MorphReplace width={30} height={30}>
+        <MorphReplace width={this.props.size} height={this.props.size}>
           {this.state.onHover ?
             <SvgComponent key="enterState" path={this.props.hoverState} {...this.props} />
             :
@@ -44,8 +44,11 @@ class MorphIcon extends Component {
 
 MorphIcon.propTypes = {
   originState: React.PropTypes.string.isRequired,
-  hoverState: React.PropTypes.string.isRequired
+  hoverState: React.PropTypes.string.isRequired,
+  iconStyle: React.PropTypes.any,
+  size: React.PropTypes.number
 };
 
+MorphIcon.defaultProps = { size: 25 };
 
 export default MorphIcon;

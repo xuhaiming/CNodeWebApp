@@ -20,7 +20,17 @@ const styles = {
   },
   tabs: {
     backgroundColor: '#80bd01',
-    color: '#f6f6f6'
+    color: '#f6f6f6',
+    height: 60
+  },
+  icon: {
+    height: 22,
+    padding: 0,
+    position: 'relative',
+    top: -10
+  },
+  tab: {
+    fontSize: 12
   }
 };
 
@@ -54,6 +64,8 @@ class NavBar extends Component {
       <MorphIcon
         originState={iconPaths[tab.key]}
         hoverState={iconPaths[`${tab.key}_after`]}
+        iconStyle={styles.icon}
+        size={22}
       />
     );
 
@@ -63,6 +75,7 @@ class NavBar extends Component {
         label={tab.value}
         value={index}
         icon={itemIcon(tab)}
+        style={styles.tab}
       />
     ));
 
