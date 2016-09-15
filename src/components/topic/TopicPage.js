@@ -7,6 +7,7 @@ import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
 import CommentItem from './CommentItem';
 import commonStyle from '../../styles/common';
 import Highlight from 'react-highlight';
+import QuillEditor from '../shared/QuillEditor';
 
 const styles = {
   topicDetailContainer: {
@@ -32,7 +33,9 @@ class TopicPage extends Component {
     const topic = this.state.data;
 
     if (!topic) {
-      get(this.props.location).then(data => this.setState({ data }));
+      get(this.props.location).then(data => {
+        this.setState({ data });
+      });
 
       return <CircularProgress style={styles.progress} size={1.5} />;
     }
@@ -61,13 +64,15 @@ class TopicPage extends Component {
         </Card>
         <h3>{commentList.length === 0 ? '无评论' : `评论(${commentList.length})`}</h3>
         {commentList}
+        <QuillEditor />
       </div>
     );
   }
 }
 
 TopicPage.propTypes = {
-  location: React.PropTypes.string.isRequired
+  location: React.PropTypes.string.isRequired,
+  goToUserPage: React.PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

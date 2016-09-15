@@ -31,16 +31,17 @@ const CommentItem = ({ comment, goToUserPage }) => (
 );
 
 CommentItem.propTypes = {
-  comment: React.PropTypes.object.isRequired
+  comment: React.PropTypes.object.isRequired,
+  goToUserPage: React.PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = dispatch => ({
-    goToUserPage: userId => {
-        dispatch(push(`/user/${userId}`));
-    }
+  goToUserPage: userId => {
+    dispatch(push(`/user/${userId}`));
+  }
 });
 
 export default connect(
-    null,
-    mapDispatchToProps
+  null,
+  mapDispatchToProps
 )(CommentItem);

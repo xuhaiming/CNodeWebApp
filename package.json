@@ -28,6 +28,7 @@
   "dependencies": {
     "history": "2.1.2",
     "material-ui": "^0.15.2",
+    "quill": "^1.0.3",
     "radium": "^0.18.1",
     "react": "^15.2.1",
     "react-cookie": "^0.4.8",
