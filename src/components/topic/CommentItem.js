@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { Card, CardHeader, CardText } from 'material-ui/Card';
 import Highlight from 'react-highlight';
+import TimeAgo from '../shared/TimeAgo';
 
 const styles = {
   title: {
@@ -17,7 +18,7 @@ const CommentItem = ({ comment, goToUserPage }) => (
   <Card containerStyle={styles.commentContainer}>
     <CardHeader
       title={comment.author.loginname}
-      subtitle={comment.create_at}
+      subtitle={<TimeAgo data={comment.create_at} />}
       avatar={comment.author.avatar_url}
       style={styles.title}
       onTouchTap={() => goToUserPage(comment.author.loginname)}

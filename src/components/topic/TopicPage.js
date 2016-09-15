@@ -8,6 +8,7 @@ import CommentItem from './CommentItem';
 import commonStyle from '../../styles/common';
 import Highlight from 'react-highlight';
 import QuillEditor from '../shared/QuillEditor';
+import TimeAgo from '../shared/TimeAgo';
 
 const styles = {
   topicDetailContainer: {
@@ -49,7 +50,7 @@ class TopicPage extends Component {
         <Card>
           <CardHeader
             title={topic.author.loginname}
-            subtitle={topic.create_at}
+            subtitle={<TimeAgo data={topic.create_at} />}
             avatar={topic.author.avatar_url}
             titleStyle={styles.title}
             style={styles.header}

@@ -5,6 +5,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 import { Card, CardHeader, CardText } from 'material-ui/Card';
 import UserTopicList from './UserTopicList';
 import commonStyle from '../../styles/common';
+import TimeAgo from '../shared/TimeAgo';
 
 const styles = {
   progress: commonStyle.progress
@@ -30,7 +31,7 @@ class UserPage extends Component {
       <Card>
         <CardHeader
           title={userInfo.loginname}
-          subtitle={userInfo.create_at}
+          subtitle={<TimeAgo data={userInfo.create_at} />}
           avatar={userInfo.avatar_url}
         />
         <CardText>

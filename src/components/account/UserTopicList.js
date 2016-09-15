@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { List, ListItem } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
+import TimeAgo from '../shared/TimeAgo';
 
 const UserTopicList = ({ topics, goToTopicPage }) => {
   const userTopics = topics.map(topic => (
     <ListItem
       key={topic.id}
       primaryText={topic.title}
-      secondaryText={topic.last_reply_at}
+      secondaryText={<TimeAgo data={topic.last_reply_at} />}
       leftAvatar={<Avatar src={topic.author.avatar_url} />}
       onTouchTap={() => goToTopicPage(topic.id)}
     />
@@ -23,7 +24,7 @@ const UserTopicList = ({ topics, goToTopicPage }) => {
 };
 
 UserTopicList.propTypes = {
-  topics: React.PropTypes.string.isRequired,
+  topics: React.PropTypes.array.isRequired,
   goToTopicPage: React.PropTypes.func.isRequired
 };
 
