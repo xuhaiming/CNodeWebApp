@@ -1,14 +1,19 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-  entry: [
-    './src/index'
-  ],
+  devtool: 'eval-source-map',
+  entry: ['./src/index', 'webpack-hot-middleware/client'],
   output: {
     path: path.join(__dirname, 'build'),
     filename: 'main.js',
     publicPath: '/build/'
   },
+  plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ],
   module: {
     loaders: [
       {
@@ -18,7 +23,8 @@ module.exports = {
       },
       { test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
         loader: 'file'
-      }
+      },
+      { test: /\.css$/, loader: 'style-loader!css-loader' }
     ]
   }
 };

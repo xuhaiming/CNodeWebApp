@@ -1,25 +1,20 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import reducers from './reducers';
-import MainPage from './components/landing/MainPage';
-import Header from './components/shared/Header';
-import Toast from './components/shared/Toast';
-import TopicPage from './components/topic/TopicPage';
-import UserPage from './components/account/UserPage';
-import { Router, Route, useRouterHistory } from 'react-router';
+import App from './app';
+import { useRouterHistory } from 'react-router';
 import { createHashHistory } from 'history';
-import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
-import { Style } from 'radium';
-import styles from './styles/rules';
-
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { routerMiddleware } from 'react-router-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+
+import highlightStyle from '../assets/styles/hybrid.css';
+import quillStyle from '../assets/styles/quill.snow.css';
 
 injectTapEventPlugin();
 
-const App = () => {
+const AppContainer = () => {
   const history = useRouterHistory(createHashHistory)({ queryKey: false });
   const middleware = routerMiddleware(history);
   const store = createStore(
@@ -27,25 +22,21 @@ const App = () => {
     window.devToolsExtension && window.devToolsExtension(),
     applyMiddleware(middleware)
   );
-  const reduxHistory = syncHistoryWithStore(history, store);
+
+  if (module.hot) {
+    module.hot.accept('./reducers/index', () => {
+      const nextReducer = combineReducers(require('./reducers/index'));
+      store.replaceReducer(nextReducer);
+    });
+  }
+
+  const props = { history, store };
 
   return (
     <Provider store={store}>
-      <MuiThemeProvider>
-        <div>
-          <Style rules={styles} />
-          <Header />
-          <Router history={reduxHistory}>
-            <Route path="/" component={MainPage} />
-            <Route path="/:tabName" component={MainPage} />
-            <Route path="/topic/:topicId" component={TopicPage} />
-            <Route path="/user/:userId" component={UserPage} />
-          </Router>
-          <Toast />
-        </div>
-      </MuiThemeProvider>
+      <App {...props} />
     </Provider>
   );
 };
 
-render(<App />, document.getElementById('root'));
+render(<AppContainer />, document.getElementById('root'));
