@@ -71,9 +71,9 @@ class LoginDialog extends Component {
       >
         <div>请输入Access Token:</div>
         <TextField
+          id="token-input"
           style={styles.tokenInput}
           onChange={this.handleInputChange}
-          hintText="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
         />
       </Dialog>
     );
