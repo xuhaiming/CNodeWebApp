@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
 import Avatar from 'material-ui/Avatar';
 import { push } from 'react-router-redux';
+import TimeAgo from '../shared/TimeAgo';
 
 const styles = {
   topicItemContainer: {
@@ -12,23 +13,35 @@ const styles = {
     width: 'calc(100% - 20px)'
   },
   title: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: 'bold',
     textAlign: 'left'
   },
   mainContainer: {
-    marginTop: 10
+    marginTop: 10,
+    float: 'left',
+    width: '100%'
   },
   avatarContainer: {
     width: 30,
-    float: 'left'
+    display: 'inline-block'
   },
   contentContainer: {
-    float: 'left',
-    width: 'calc(100% - 30px)'
+    width: 'calc(100% - 35px)',
+    display: 'inline-block',
+    verticalAlign: 'top',
+    textAlign: 'left',
+    paddingLeft: 5,
+    fontSize: 12
   },
-  authorName: {
-    fontSize: 10
+  createAt: {
+    fontSize: 11
+  },
+  floatRight: {
+    float: 'right'
+  },
+  subinfoContainer: {
+    paddingTop: 2
   },
   clearFix: {
     clear: 'both'
@@ -44,11 +57,13 @@ const TopicItem = ({ topic, goToDetailPage }) => (
       <div style={styles.title}>{topic.title}</div>
       <div style={styles.mainContainer}>
         <div style={styles.avatarContainer}>
-          <Avatar src={topic.author.avatar_url} size={25} />
+          <Avatar src={topic.author.avatar_url} size={30} />
         </div>
         <div style={styles.contentContainer}>
-          <div>
-            <div style={styles.authorName}>{topic.author.loginname}</div>
+          <div>{topic.author.loginname}</div>
+          <div style={styles.subinfoContainer}>
+            <span style={styles.createAt}>创建于：<TimeAgo data={topic.create_at} /></span>
+            <span style={styles.floatRight}>{topic.reply_count} / {topic.visit_count}</span>
           </div>
         </div>
         <div style={styles.clearFix}></div>
