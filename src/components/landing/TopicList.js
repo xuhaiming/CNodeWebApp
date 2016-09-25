@@ -22,6 +22,7 @@ class TopicList extends Component {
     if (!this.state.data) {
       if (isActive) {
         get('topics', { tab: tabName }).then(data => this.setState({ data }));
+        get('topics', { tab: tabName }).then(data => console.log(data));
       }
 
       return <CircularProgress style={styles.progress} size={1.5} />;

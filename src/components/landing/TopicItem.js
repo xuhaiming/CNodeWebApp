@@ -1,47 +1,58 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
+import Avatar from 'material-ui/Avatar';
 import { push } from 'react-router-redux';
 
 const styles = {
-  topicItemTitleContainer: {
-    margin: '5px 10px',
-    width: 'calc(100% - 20px)',
-    height: 'auto'
-  },
   topicItemContainer: {
-    textAlign: 'left',
-    padding: '10px 15px'
+    margin: '5px 10px',
+    padding: 10,
+    height: 'auto',
+    width: 'calc(100% - 20px)'
   },
-  topicItemAvatar: {
+  title: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    textAlign: 'left'
+  },
+  mainContainer: {
+    marginTop: 10
+  },
+  avatarContainer: {
     width: 30,
-    display: 'inline-block'
+    float: 'left'
   },
-  topicItemContent: {
-    display: 'inline-block',
-    marginLeft: 15,
-    maxWidth: 'calc(100% - 180px)'
+  contentContainer: {
+    float: 'left',
+    width: 'calc(100% - 30px)'
   },
-  topicItemTitle: {
-    margin: 0
+  authorName: {
+    fontSize: 10
+  },
+  clearFix: {
+    clear: 'both'
   }
 };
 
 const TopicItem = ({ topic, goToDetailPage }) => (
   <RaisedButton
-    style={styles.topicItemTitleContainer}
+    style={styles.topicItemContainer}
     onClick={() => goToDetailPage(topic)}
   >
-    <div style={styles.topicItemContainer}>
-      <img
-        src={topic.author.avatar_url}
-        alt={topic.author.loginname}
-        style={styles.topicItemAvatar}
-      />
-      <span style={styles.topicItemContent}>
-        <h4 style={styles.topicItemTitle}>{topic.title}</h4>
-        <p style={{}}>{topic.author.loginname}</p>
-      </span>
+    <div>
+      <div style={styles.title}>{topic.title}</div>
+      <div style={styles.mainContainer}>
+        <div style={styles.avatarContainer}>
+          <Avatar src={topic.author.avatar_url} size={25} />
+        </div>
+        <div style={styles.contentContainer}>
+          <div>
+            <div style={styles.authorName}>{topic.author.loginname}</div>
+          </div>
+        </div>
+        <div style={styles.clearFix}></div>
+      </div>
     </div>
   </RaisedButton>
 );
@@ -63,4 +74,3 @@ export default connect(
   null,
   mapDispatchToProps
 )(TopicItem);
-

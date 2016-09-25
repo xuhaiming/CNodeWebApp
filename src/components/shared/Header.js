@@ -28,12 +28,12 @@ const styles = {
     marginTop: 65
   },
   logo: {
-    width: 120,
+    width: 90,
     height: 'auto'
   },
   imageContainer: {
     width: 120,
-    margin: '10px 20px'
+    margin: 10
   },
   userButton: {
     position: 'absolute',
