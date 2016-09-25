@@ -12,8 +12,11 @@ import showToast from '../../actions/showToast';
 import LoginDialog from '../account/LoginDialog';
 import MorphIcon from './MorphIcon/index';
 import iconPaths from './MorphIcon/iconPaths';
+import styleConstants from '../../constants/styles';
 
-const ICON_SIZE = 35;
+const ICON_CONTAINER_SIZE = 30;
+const ICON_SIZE = 25;
+const ICON_PADDING = (ICON_CONTAINER_SIZE - ICON_SIZE) / 2;
 
 const styles = {
   headerContainer: {
@@ -25,7 +28,7 @@ const styles = {
     borderBottom: '1px solid #e1e1e1'
   },
   placeHolder: {
-    marginTop: 65
+    marginTop: styleConstants.headerHeight
   },
   logo: {
     width: 90,
@@ -38,20 +41,23 @@ const styles = {
   userButton: {
     position: 'absolute',
     right: 15,
-    top: 10
+    top: 12
+  },
+  userButtonContent: {
+    padding: ICON_PADDING
   },
   userIcon: {
     backgroundColor: '#80bd01',
     borderRadius: '50%',
-    width: ICON_SIZE,
-    height: ICON_SIZE
+    width: ICON_CONTAINER_SIZE,
+    height: ICON_CONTAINER_SIZE
   },
   avatarContainer: {
     position: 'static'
   },
   avatar: {
-    width: ICON_SIZE,
-    height: ICON_SIZE
+    width: ICON_CONTAINER_SIZE,
+    height: ICON_CONTAINER_SIZE
   },
   anchorOrigin: {
     horizontal: 'right',
@@ -113,6 +119,7 @@ class Header extends Component {
         <MorphIcon
           originState={iconPaths.person}
           hoverState={iconPaths.login}
+          iconStyle={styles.userButtonContent}
           fill="black"
         />
       </FloatingActionButton>

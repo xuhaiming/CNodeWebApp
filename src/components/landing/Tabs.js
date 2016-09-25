@@ -7,10 +7,16 @@ import { push } from 'react-router-redux';
 import tabNames from '../../constants/tabNames';
 import MorphIcon from '../shared/MorphIcon/index';
 import iconPaths from '../shared/MorphIcon/iconPaths';
+import styleConstants from '../../constants/styles';
+
+const tabsHeight = 50;
+const contentPadding = 5;
+const contentHeight = styleConstants.headerHeight + tabsHeight + contentPadding * 2;
 
 const styles = {
   swipeContainer: {
-    height: 'calc(100vh - 140px)'
+    height: `calc(100vh - ${contentHeight}px)`,
+    padding: `${contentPadding}px 0`
   },
   tabsContainer: {
     position: 'fixed',
@@ -21,16 +27,18 @@ const styles = {
   tabs: {
     backgroundColor: '#80bd01',
     color: '#f6f6f6',
-    height: 60
+    height: tabsHeight
   },
   icon: {
-    height: 22,
+    height: 23,
     padding: 0,
     position: 'relative',
-    top: -10
+    right: 2
   },
   tab: {
-    fontSize: 12
+    fontSize: 12,
+    position: 'relative',
+    top: -11
   }
 };
 
@@ -65,7 +73,7 @@ class NavBar extends Component {
         originState={iconPaths[tab.key]}
         hoverState={iconPaths[`${tab.key}_after`]}
         iconStyle={styles.icon}
-        size={22}
+        size={21}
       />
     );
 
